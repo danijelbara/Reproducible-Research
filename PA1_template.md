@@ -37,8 +37,6 @@ Loading data:
         
         ```{r loadingdata, echo=TRUE}
 # set working directory
-#setwd("/Users/Air/spec-repo/ReproducibleResearch")
-# NOTE: for user to script work properly must set his/her own working directory 
 fileName = "activity.zip"
 # download file
 if (!file.exists(fileName)) 

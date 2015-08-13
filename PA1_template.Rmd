@@ -36,9 +36,6 @@ https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip
 Loading data:
 
 ```{r loadingdata, echo=TRUE}
-# set working directory
-#setwd("/Users/Air/spec-repo/ReproducibleResearch")
-# NOTE: for user to script work properly must set his/her own working directory 
 fileName = "activity.zip"
 # download file
 if (!file.exists(fileName)) 
@@ -95,6 +92,8 @@ g1 <- g1 + theme(plot.title = element_text(lineheight=1, face="bold"))
 print(g1)
 ```
 
+![Hist plot](figure/totnrstepsperday.png) 
+
 ## What is the average daily activity pattern?
 Calculate the table with the average number of steps taken each 5-minute interval, ignoring the missing values.  
 ```{r calcstepsperinterval}
@@ -113,6 +112,7 @@ g <- g + labs(title="Average daily activity")
 g <- g + theme(plot.title = element_text(lineheight=1, face="bold"))
 print(g)
 ```
+![Average daily activity plot](figure/averagedailyactivity.png) 
 
 ## Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -170,6 +170,7 @@ g2 <- g2 + theme(plot.title = element_text(lineheight=1, face="bold"))
 ## combining with previous
 grid.arrange(g1, g2, nrow=2)
 ```
+![Missing values plot](figure/missingvalues.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -191,13 +192,15 @@ week_diff <- aggregate(
 ```{r histweekdiff, ECHO = true, fig.width=14}
 g <- ggplot(week_diff,aes(x=interval,y=steps)) 
 g <- g + theme_bw()
-g <- g + facet_wrap(~dow,ncol=1)
+g <- g + facet_grid("dow ~ .")
 g <- g + geom_line(colour="green")
 g <- g + labs(x = "Interval") 
 g <- g + labs(y = "Number of steps") 
 g <- g + labs(title="Average daily activity")
 g <- g + theme(plot.title = element_text(lineheight=1, face="bold"),
-               strip.text.x = element_text(colour="red", size=10),
+               strip.text.x = element_text(size=10),
                strip.background = element_rect(colour="black",fill="green"))
 print(g)
 ```
+
+![Week diff](figure/weekdiff.png)
