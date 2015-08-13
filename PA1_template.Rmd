@@ -191,13 +191,13 @@ week_diff <- aggregate(
 ```{r histweekdiff, ECHO = true, fig.width=14}
 g <- ggplot(week_diff,aes(x=interval,y=steps)) 
 g <- g + theme_bw()
-g <- g + facet_grid("dow ~ .")
+g <- g + facet_wrap(~dow,ncol=1)
 g <- g + geom_line(colour="green")
 g <- g + labs(x = "Interval") 
 g <- g + labs(y = "Number of steps") 
 g <- g + labs(title="Average daily activity")
 g <- g + theme(plot.title = element_text(lineheight=1, face="bold"),
-               strip.text.x = element_text(size=10),
+               strip.text.x = element_text(colour="red", size=10),
                strip.background = element_rect(colour="black",fill="green"))
 print(g)
 ```
